@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load wagtailimages_tags %}
+{% load wagtailcore_tags %}
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.0.0/firebase-storage.js"></script>
+    <title>{% block title %}{{ page.title }}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/landing_page.css' %}">
+</head>
+<body>
+    <header>
+        <h1>{% block page_title %}{{ page.page_title }}{% endblock %}</h1>
+        <p>{% block content %}{{ page.content }}{% endblock %}</p>
+    </header>
+    <main>
+        
+        <form id="plant-form" action="/landing_page/" method="post">
+            {% csrf_token %}
+            <label for="plant-name">Plant Name:</label>
+            <input type="text" id="plant-name" name="plant-name" required>
+
+            <label for="plant-description">Description:</label>
+            <textarea id="plant-description" name="plant-description" required></textarea>
+
+            <label for="plant-location">Location:</label>
+            <input type="text" id="plant-location" name="plant-location" required>
+
+            <label for="plant-image">Image:</label>
+            <input type="file" id="plant-image" name="plant-image" accept="image/*">
+
+            <button type="submit">Submit Request</button>
+        </form>
+    </main>
+    <script type="module" src="{% static 'js/landing_page.js' %}"></script>
+</body>
+</html>
